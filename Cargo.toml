@@ -1,0 +1,32 @@
+[package]
+name = "collaboflow-backup-lambda"
+version = "0.1.0"
+edition = "2021"
+
+# Starting in Rust 1.62 you can use `cargo add` to add dependencies 
+# to your project.
+#
+# If you're using an older Rust version,
+# download cargo-edit(https://github.com/killercup/cargo-edit#installation) 
+# to install the `add` subcommand.
+#
+# Running `cargo add DEPENDENCY_NAME` will
+# add the latest version of a dependency to the list,
+# and it will keep the alphabetic ordering for you.
+
+[dependencies]
+lambda_http = "0.8.3"
+lambda_runtime = "0.8.3"
+tokio = { version = "1", features = ["macros"] }
+tracing = { version = "0.1", features = ["log"] }
+tracing-subscriber = { version = "0.3", default-features = false, features = ["fmt"] }
+serde_json = "1.0.108"
+serde = { version = "1.0.193", features = ["derive"] }
+collaboflow-rs = "0.0.13"
+config = "0.13.4"
+clap = "4.4.11"
+time = "0.3.30"
+structopt = { version = "0.3.26", features = [] }
+object = { version = "0.32.1", features = [] }
+aws-config= { version = "1.0.3", features = ["behavior-version-latest"] }
+aws-sdk-s3= { version = "1.5.0", features = ["rt-tokio"] }
