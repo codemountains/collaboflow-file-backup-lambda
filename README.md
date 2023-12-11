@@ -10,6 +10,8 @@
 
 ### Build and Deploy
 
+🧰 **[Cargo Lambda](https://www.cargo-lambda.info/) をインストールする必要があります。**
+
 ビルド後、関数 URL を有効にしてデプロイします。
 
 ```shell
