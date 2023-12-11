@@ -5,6 +5,8 @@ use serde_json::Value;
 use std::env;
 use tracing::info;
 
+const FID_KEY: &str = "fidFile";
+
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct CollaboflowWebhookResponse {
     contents: Value,
@@ -24,29 +26,31 @@ pub fn get_file_info(s: &str) -> Result<BackupFile, ()> {
         }
     };
 
-    let file_id = resp
-        .contents
-        .get("fidFile")
-        .unwrap()
-        .get("value")
-        .unwrap()
-        .as_str()
-        .unwrap()
-        .to_string();
-    let file_name = resp
-        .contents
-        .get("fidFile")
-        .unwrap()
-        .get("label")
-        .unwrap()
-        .as_str()
-        .unwrap()
-        .to_string();
+    // ファイルIDを取得する
+    let id = match resp.contents.get(FID_KEY) {
+        None => "".to_string(),
+        Some(fid_file) => match fid_file.get("value") {
+            None => "".to_string(),
+            Some(value) => match value.as_str() {
+                None => "".to_string(),
+                Some(v) => v.to_string(),
+            },
+        },
+    };
 
-    Ok(BackupFile {
-        id: file_id,
-        name: file_name,
-    })
+    // ファイル名を取得する
+    let name = match resp.contents.get(FID_KEY) {
+        None => "".to_string(),
+        Some(fid_file) => match fid_file.get("label") {
+            None => "".to_string(),
+            Some(value) => match value.as_str() {
+                None => "".to_string(),
+                Some(v) => v.to_string(),
+            },
+        },
+    };
+
+    Ok(BackupFile { id, name })
 }
 
 pub async fn download_file(id: &str) -> Result<Bytes, ()> {
