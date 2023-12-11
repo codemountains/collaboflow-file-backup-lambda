@@ -1,5 +1,7 @@
 # Collaboflow File Backup Lambda
 
+**This is not an official project, just a hobby project.**
+
 コラボフロー Webhook を起点に添付ファイルを Amazon S3 にバックアップとして保存する AWS Lambda 関数
 
 <div align="center">
