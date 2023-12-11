@@ -8,12 +8,22 @@
 
 ## Deploy
 
+### Build and Deploy
+
 ビルド後、関数 URL を有効にしてデプロイします。
 
 ```shell
 cargo lambda build --release
 cargo lambda deploy --enable-function-url
 ```
+
+### 環境変数
+
+- `BACKUP_BUCKET_NAME`: バックアップを格納する S3 バケット名
+- `BACKUP_FID_KEY`: 添付ファイルパーツのパーツ ID
+- `CF_API_KEY`: コラボフロー API キー
+- `CF_BASE_URL`: コラボフロー API URL (`https://{hostname}/{instance}/api/index.cfm`)
+- `CF_USER_ID`: コラボフローの管理者ユーザー ID
 
 ## Setting up
 
