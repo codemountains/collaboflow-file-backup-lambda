@@ -1,6 +1,6 @@
 # Collaboflow File Backup Lambda
 
-コラボフロー Webhook を起点に添付ファイルを Amazon S3 にバックアップとして保存する AWS Lambda 関数です。
+コラボフロー Webhook を起点に添付ファイルを Amazon S3 にバックアップとして保存する AWS Lambda 関数
 
 ## Deploy
 
