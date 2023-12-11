@@ -4,8 +4,7 @@ mod s3;
 use crate::collaboflow::{download_file, get_file_info};
 use crate::s3::put_object;
 use lambda_http::{run, service_fn, Body, Error, Request, Response};
-
-const BUCKET_NAME: &str = "collaboflow-file-backup";
+use std::env;
 
 /// This is the main body for the function.
 /// Write your code inside it.
@@ -30,11 +29,14 @@ async fn function_handler(event: Request) -> Result<Response<Body>, Error> {
     };
 
     if !backup_file.id.is_empty() {
+        let bucket = env::var("BACKUP_BUCKET_NAME")
+            .unwrap_or_else(|_| panic!("{} is undefined.", "BACKUP_BUCKET_NAME"));
+
         // コラボフローからファイルを取得する
         if let Ok(data) = download_file(&backup_file.id).await {
             // ファイルIDでフォルダを作成し、その中にファイルを保存する
             let obj = format!("{}/{}", &backup_file.id, &backup_file.name);
-            let _ = put_object(BUCKET_NAME, &obj, data).await;
+            let _ = put_object(&bucket, &obj, data).await;
         }
     }
 
