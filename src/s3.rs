@@ -6,7 +6,7 @@ use std::error::Error;
 use tracing::info;
 
 // Adds an object to a bucket and returns a public URI.
-pub async fn put_object(bucket: &str, object: &str, data: Bytes) -> Result<(), Box<dyn Error>> {
+pub async fn put_object(bucket: &str, key: &str, data: Bytes) -> Result<(), Box<dyn Error>> {
     let region = Some("ap-northeast-1");
     let region_provider = RegionProviderChain::first_try(region.map(Region::new))
         .or_default_provider()
@@ -18,7 +18,7 @@ pub async fn put_object(bucket: &str, object: &str, data: Bytes) -> Result<(), B
     let request = client
         .put_object()
         .bucket(bucket)
-        .key(object)
+        .key(key)
         .body(body)
         .send()
         .await?;

@@ -35,8 +35,8 @@ async fn function_handler(event: Request) -> Result<Response<Body>, Error> {
         // コラボフローからファイルを取得する
         if let Ok(data) = download_file(&backup_file.id).await {
             // ファイルIDでフォルダを作成し、その中にファイルを保存する
-            let obj = format!("{}/{}", &backup_file.id, &backup_file.name);
-            let _ = put_object(&bucket, &obj, data).await;
+            let key = format!("{}/{}", &backup_file.id, &backup_file.name);
+            let _ = put_object(&bucket, &key, data).await;
         }
     }
 
