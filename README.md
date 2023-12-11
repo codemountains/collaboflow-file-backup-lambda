@@ -2,6 +2,10 @@
 
 コラボフロー Webhook を起点に添付ファイルを Amazon S3 にバックアップとして保存する AWS Lambda 関数
 
+<div align="center">
+  <img src="assets/collaboflow_file_bk_lambda.png" alt=""/>
+</div>
+
 ## Deploy
 
 ビルド後、関数 URL を有効にしてデプロイします。
